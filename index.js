@@ -43,15 +43,29 @@ const player = new Fighter({
     },
     sprites: {
         idle: { imageSrc: "./img/samuraiMack/Idle.png",
-                framesMax: 8,
+                framesMax: 8
                 },
         run: { imageSrc: "./img/samuraiMack/Run.png",
-                framesMax: 8,
-            } ,  
+                framesMax: 8
+            },  
         jump: { imageSrc: "./img/samuraiMack/Jump.png",
-                framesMax: 2,
+                framesMax: 2
+        },
+        fall: { imageSrc: "./img/samuraiMack/Fall.png",
+        framesMax: 2
+        },
+        attack1: { imageSrc: "./img/samuraiMack/Attack1.png",
+        framesMax: 6
         }
-    },
+        },
+        attackBox: {
+            offset: {
+                x: 180,
+                y: 50
+            },
+            widht: 160,
+            height: 50
+        },
     imageSrc: './img/samuraiMack/Idle.png',
     framesMax: 8,
     scale: 2.5,
@@ -69,10 +83,37 @@ const enemy = new Fighter({
         y:0
     },
     offset: {
-        x: -50,
-        y: 0
+        x: 215,
+        y: 167
     },
-
+    sprites: {
+        idle: { imageSrc: "./img/kenji/Idle.png",
+                framesMax: 4
+                },
+        run: { imageSrc: "./img/kenji/Run.png",
+                framesMax: 8
+            },  
+        jump: { imageSrc: "./img/kenji/Jump.png",
+                framesMax: 2
+        },
+        fall: { imageSrc: "./img/kenji/Fall.png",
+        framesMax: 2
+        },
+        attack1: { imageSrc: "./img/kenji/Attack1.png",
+        framesMax: 4
+        }
+        },
+        attackBox: {
+            offset: {
+                x: -235,
+                y: 50
+            },
+            widht: 100,
+            height: 50
+        },
+    imageSrc: './img/kenji/Idle.png',
+    framesMax: 4,
+    scale: 2.5,
 })
 
 enemy.draw();
@@ -120,54 +161,79 @@ function animate(){
     background.update();
     shop.update();
     player.update();
-    //enemy.update();
+    enemy.update();
 
     player.velocity.x = 0;
     enemy.velocity.x = 0;
     //player movement
-    player.image = player.sprites.idle.image
+
     if(keys.a.pressed && keys.d.pressed){
         player.velocity.x = 0;
     }
-
     else if(keys.a.pressed) {
         player.velocity.x = -5;
-        player.image = player.sprites.run.image
+        player.switchSprite("run")
     }
     else if( keys.d.pressed){
         player.velocity.x = 5;
-        player.image = player.sprites.run.image
+        player.switchSprite("run")
+    }
+    else {
+        player.switchSprite("idle")
+    }
+    //jumping
+    if(player.velocity.y < 0) { //player is in the air
+        player.switchSprite("jump")
+    } else if(player.velocity.y > 0){
+        player.switchSprite("fall")
     }
 
-    if(player.velocity.y < 0) { //player is in the air
-        player.image = player.sprites.jump.image
-        player.framesMax = player.sprites.jump.framesMax
-    }
     //enemy movement
     if(keys.ArrowLeft.pressed && keys.ArrowRight.pressed){
         enemy.velocity.x = 0;
     }
     else if(keys.ArrowLeft.pressed) {
         enemy.velocity.x = -5;
+        enemy.switchSprite("run")
     }
     else if( keys.ArrowRight.pressed){
         enemy.velocity.x = 5;
+        enemy.switchSprite("run")
+    }
+    else {
+        enemy.switchSprite("idle")
+    }
+    // jumping
+    if (enemy.velocity.y < 0) {
+        enemy.switchSprite('jump')
+    } else if (enemy.velocity.y > 0) {
+        enemy.switchSprite('fall')
     }
 
     //detect for colision
-    if( rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&  player.isAttacking) {
+    if( rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&  player.isAttacking && player.framesCurrent === 4) {
         player.isAttacking = false;
         enemy.health -= 20;
         document.querySelector("#enemyHealth").style.width = enemy.health + '%';
 
     }
+
+    //if player misses
+    if (player.isAttacking && player.framesCurrent === 4) {
+        player.isAttacking = false;
+    }
     //enemy colision
-    if( rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&  enemy.isAttacking) {
+    if( rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&  enemy.isAttacking && enemy.framesCurrent === 2) {
         enemy.isAttacking = false;
         player.health -= 20;
         document.querySelector("#playerHealth").style.width = player.health + '%';
 
     }
+    //if enemy misses
+    if (enemy.isAttacking && enemy.framesCurrent === 2) {
+        enemy.isAttacking = false;
+    }
+    
     //end game based on health
     if( enemy.health <= 0 || player.health <= 0) {
         determineWinner({player, enemy, timerId});

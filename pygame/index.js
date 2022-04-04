@@ -1,8 +1,8 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
-canvas.width = 1024
-canvas.height = 576
+canvas.width = 0.987*window.innerWidth;
+canvas.height = 0.983*window.innerHeight;
 
 const gravity = 0.7;
 c.fillRect(0, 0, canvas.width, canvas.height)
@@ -26,6 +26,7 @@ class Sprite {
         }
         this.color = color;
         this.isAttacking = false;
+        this.health = 100;
     }
     draw() {
         
@@ -136,6 +137,19 @@ const  keys = {
 }
 let lastKey
 
+function playerCollision({rectangle1, rectangle2}) {
+    return (
+        (rectangle1.position.x + rectangle1.widht >= rectangle2.position.x && 
+        rectangle1.position.x + rectangle1.widht <= rectangle2.position.x + rectangle2.widght ||
+        rectangle1.position.x >= rectangle2.position.x && 
+        rectangle1.position.x <= rectangle2.position.x + rectangle2.widght) &&
+
+        (rectangle1.position.y + rectangle1.height >= rectangle2.position.y && 
+        rectangle1.position.y + rectangle1.height <= rectangle2.position.y + rectangle2.height ||
+        rectangle1.position.y >= rectangle2.position.y && 
+        rectangle1.position.y <= rectangle2.position.y + rectangle2.height) 
+    )
+}
 function rectangularCollision({ rectangle1, rectangle2 }) {
     return (
         rectangle1.attackBox.position.x + rectangle1.attackBox.widht >= rectangle2.position.x && 
@@ -144,6 +158,37 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
         rectangle1.attackBox.position.y <= rectangle2.position.y + rectangle2.height
     )
 }
+
+function determineWinner({player, enemy, timerId}) {
+    clearTimeout(timerId);
+    document.querySelector("#displayText").style.display = "flex";
+    if( player.health === enemy.health) {
+        document.querySelector("#displayText").innerHTML = "TIE";
+        }
+    else if(player.health > enemy.health) {
+        document.querySelector("#displayText").innerHTML = "PLAYER WINS";
+        }
+    else if(player.health < enemy.health) {
+        document.querySelector("#displayText").innerHTML = "ENEMY WINS";
+        }
+}
+let timer = 60
+let timerId 
+function decreaseTimer(){
+
+    if(timer > 0) {  
+
+        timerId = setTimeout(decreaseTimer, 1000);
+        timer--;
+        document.querySelector('#timer').innerHTML = timer;
+
+    }   
+    if(timer === 0) {
+        determineWinner({player, enemy, timerId});
+    }
+}
+decreaseTimer();
+
 function animate(){
     window.requestAnimationFrame(animate);
     c.fillStyle = "black";
@@ -177,13 +222,25 @@ function animate(){
     //detect for colision
     if( rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&  player.isAttacking) {
         player.isAttacking = false;
-        console.log("go")
+        enemy.health -= 20;
+        document.querySelector("#enemyHealth").style.width = enemy.health + '%';
+
     }
     //enemy colision
     if( rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&  enemy.isAttacking) {
         enemy.isAttacking = false;
-        console.log("goat")
-}
+        player.health -= 20;
+        document.querySelector("#playerHealth").style.width = player.health + '%';
+
+    }
+    //end game based on health
+    if( enemy.health <= 0 || player.health <= 0) {
+        determineWinner({player, enemy, timerId});
+    }
+
+    if( playerCollision({ rectangle1: player, rectangle2: enemy }) || playerCollision({ rectangle1: enemy, rectangle2: player }) ) {
+        console.log("Player collision")
+    }
 }
 
 window.addEventListener("keydown", (event) =>{

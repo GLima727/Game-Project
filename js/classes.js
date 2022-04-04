@@ -50,7 +50,7 @@ class Fighter extends Sprite{
         velocity,
         color = "red",
         offset = {x:0, y:0},
-        imageSrc,
+        imageSrc  = "./img/samuraiMack/Idle.png",
         scale = 1,
         framesMax = 1,
         sprites
@@ -64,13 +64,14 @@ class Fighter extends Sprite{
         })
         this.framesCurrent = 0
         this.framesElapsed = 0
-        this.framesHold = 5
+        this.framesHold = 10
         this.sprites = sprites
 
         for( const sprite in this.sprites){
             sprites[sprite].image = new Image()
             sprites[sprite].image.src =  sprites[sprite].imageSrc
         }
+        console.log(this.sprites)
 
         this.velocity = velocity;
         this.height = 150;
@@ -86,7 +87,7 @@ class Fighter extends Sprite{
             height: 50,
         }
         this.color = color;
-        this.isAttacking = false;
+        this.isAttacking
         this.health = 100;
     }
     update() {

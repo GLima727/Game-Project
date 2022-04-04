@@ -46,7 +46,8 @@ const player = new Fighter({
                 framesMax: 8
                 },
         run: { imageSrc: "./img/samuraiMack/Run.png",
-                framesMax: 8
+                framesMax: 8,
+                image: new Image()
             }   
     },
     framesMax: 8,

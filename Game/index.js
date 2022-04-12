@@ -1,8 +1,8 @@
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
-canvas.width = 1024
-canvas.height = 576
+canvas.width = document.getElementById("canvas_container").offsetWidth
+canvas.height = document.getElementById("canvas_container").offsetHeight
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
@@ -283,7 +283,8 @@ window.addEventListener("keydown", (event) =>{
         case 'w': 
             keys.w.pressed = true;
             player.lastKey = 'w';
-            player.velocity.y = -20;
+            if(player.velocity.y === 0)
+                player.velocity.y = -20;
             break;
 
         case ' ': 
@@ -311,7 +312,8 @@ window.addEventListener("keydown", (event) =>{
         case "ArrowUp":
             keys.ArrowUp.pressed = true;
             enemy.lastKey = 'ArrowUp';
-            enemy.velocity.y = -20;
+            if(enemy.velocity.y === 0)
+                enemy.velocity.y = -20;
             break;
         case "ArrowDown":
             enemy.isAttacking = true;

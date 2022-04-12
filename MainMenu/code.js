@@ -1,70 +1,3 @@
-
-let POKEMON_LIMIT_ERROR_MSG = "Too many pokemons bruh, we're runnin a business ovah here have some sense"
-let POKEMON_LIMIT = 6
-
-class Player {
-    constructor() {
-        this.name = ""
-        this.age = 0
-        this.numPokemons = 0
-        this.pokemons = []
-        this.bag = new Bag()
-
-    }
-    addPokemon(pokemon){
-        
-        try{
-            if(this.numPokemons == POKEMON_LIMIT){ //checks if the pokemon limit has been reached
-                throw tooManyPokemonsException
-            }
-
-            this.pokemons.push(pokemon) 
-            this.numPokemons++
-
-        }catch(pokemonLimitException){
-            document.writeln(POKEMON_LIMIT_ERROR_MSG)
-        }
-    }
-
-}
-
-class Pokemon {
-    constructor(name, type, level) {
-
-        this.name = name
-        this.type = type
-        this.level = level
-        this.xp = 0
-    }
-
-}
-
-class Pikachu extends Pokemon{
-    constructor(name, level){
-
-        super(name, "Lightning", level)
-        
-    }
-}
-
-class Bag {
-    constructor() {
-
-        this.numItems = 0
-        this.isFull = false
-        this.items = []
-
-    }
-
-}
-
-class Potion{
-    constructor(quantity, tag){
-        this.quantity = quantity
-        this.tag = tag
-    }
-}
-
 function gameStart() {
     playerStart()
 }
@@ -96,11 +29,6 @@ function receivePlayerName(){
         document.getElementById("headerMenuText").innerHTML = "<l>Player Name: <span style='color: #8d99ae;font-size: 1.6vw'>" + player.name + "</l>";
         document.getElementById('startMenuBox').remove();
         
-        /*document.getElementById("button1").style.display = "none"; deletes the buttons 
-        document.getElementById("nameInput").style.display = "none";
-        document.getElementById("button1").style.animation = document.getElementById("nameInput").style.animation = "fadeOut 700ms forwards";
-        document.getElementById("nameInputError").style.display = "none";*/
-
     }
 }
 const player = new Player();

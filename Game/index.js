@@ -13,7 +13,7 @@ canvas.height = document.getElementById("canvas_container").offsetHeight
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
-const gravity = 0.7 * gameMode;
+const gravity = 0.7;
 
 const background = new Sprite({
     position: {

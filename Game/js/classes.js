@@ -121,11 +121,11 @@ class Fighter extends Sprite{
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 96 ) {
             this.velocity.y = 0;
             this.position.y = 330;
-        } else this.velocity.y += gravity;
-        if(this.position.y + this.height + this.velocity.y <= 0){
+        } else if(this.position.y + this.height + this.velocity.y <= 0){
             this.velocity.y = 10;
 
-        }
+        }else this.velocity.y += gravity;
+
         let leftBorder = 10
         //canvas width minus bordersize
         let rightBorder = document.getElementById("canvas_container").offsetWidth - 50

@@ -122,7 +122,10 @@ class Fighter extends Sprite{
             this.velocity.y = 0;
             this.position.y = 330;
         } else this.velocity.y += gravity;
+        if(this.position.y + this.height + this.velocity.y <= 0){
+            this.velocity.y = 10;
 
+        }
         let leftBorder = 10
         //canvas width minus bordersize
         let rightBorder = document.getElementById("canvas_container").offsetWidth - 50
@@ -135,6 +138,7 @@ class Fighter extends Sprite{
             this.velocity.x = 0;
             this.position.x = rightBorder ;
         }
+
     }
     atack() {
         this.switchSprite("attack1")

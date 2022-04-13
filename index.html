@@ -17,7 +17,10 @@
     <link rel="stylesheet" href="./MainMenu/style.css">
 
     <script src="./MainMenu/code.js"></script>     
-    
+    <script src="./Game/index.js"></script>   
+
+    <title>OMG THIS IS THE BEST WEBSITE IVE EVER SEEN OMG THIS IS IT OMG</title>
+
 </head>
 
 <body >
@@ -36,8 +39,8 @@
       <div class="menuBox">
          <a href="./Game/index.html"> <button  id ="startButton" class="startButton" >Start</button></a>
             
-         <button  id ="settingsButton" ><i class="material-icons">settings</i></button>
-         <button  id ="insturctionsButton" onclick="openInstructions()">Instructions</button>
+         <button  id ="settingsButton" onclick="openSettings()"><i class="material-icons">settings</i></button>
+         <button  id ="instructionsButton" onclick="openInstructions()">Instructions</button>
       </div>
 
       <div class="player2Box">    
@@ -54,6 +57,17 @@
          <p> <span style="color: #0053a1"> PLAYER 2 </span> <br> ↑: JUMP <br> <-: LEFT <br> ->: RIGHT <br> ↓: ATTACK</p>
 
      </div>
+     
+     <div id="Settings" class="Settings"> 
+      <p style="text-align: center; font-size: 3vw; color: rgb(250, 243, 232); margin-left: 5.2vw; line-height: 6vw;">SETTINGS</p>
+      <div class="speedOptions">
+         <button class="speedOptionsButtons" style=" margin-left: 1vw;" onclick="changeMode('slow')" >Slow</button> 
+         <button class="speedOptionsButtons" style="width: 40%; margin-left: -1.5vw;" onclick="changeMode('normal')" >Normal</button> 
+         <button class="speedOptionsButtons" style=" margin-left: -1.5vw;" onclick="changeMode('fast')" >Fast</button>
+      </div>
+
+   </div>
+
      <div id="leftMenuArrows" class="menuArrows">
 
          <img src="left-arrow.png" style="width: 30%; margin-right: 2.8vw;">

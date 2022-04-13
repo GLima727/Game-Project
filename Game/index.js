@@ -1,5 +1,9 @@
-let playerSpeed = 20
-let enemySpeed = 20
+let gameMode = 1;
+gameMode = localStorage.getItem("gameMode");
+console.log(gameMode);
+
+let playerSpeed = 20 * gameMode;
+let enemySpeed = 20 * gameMode;
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -9,7 +13,7 @@ canvas.height = document.getElementById("canvas_container").offsetHeight
 
 c.fillRect(0, 0, canvas.width, canvas.height)
 
-const gravity = 0.7;
+const gravity = 0.7 * gameMode;
 
 const background = new Sprite({
     position: {
@@ -81,10 +85,8 @@ const player = new Fighter({
     imageSrc: './img/samuraiMack/Idle.png',
     framesMax: 8,
     scale: 2.5,
-    attackDamage: 15,
-    jumpHeight: 15
-
-
+    attackDamage: 15 * gameMode,
+    jumpHeight: 15 * gameMode
 })
 
 const enemy = new Fighter({
@@ -137,8 +139,8 @@ const enemy = new Fighter({
     imageSrc: './img/kenji/Idle.png',
     framesMax: 5,
     scale: 2.5,
-    attackDamage: 5,
-    jumpHeight: 20
+    attackDamage: 5 * gameMode,
+    jumpHeight: 20 * gameMode
 })
 
 decreaseTimer();
@@ -247,6 +249,20 @@ function animate(){
     }
 }
 
+function changeMode(mode) {
+    console.log("Huadwhuaw")
+    switch(mode){
+        case 'slow': 
+            localStorage.setItem("gameMode", 0.6);
+            break;
+        case 'normal':
+            localStorage.setItem("gameMode", 1);
+            break;
+        case 'fast':
+            localStorage.setItem("gameMode", 2);
+            break;
+    }
+}
 //controls
 keyDownEvents({player, enemy});
 keyUpEvents();

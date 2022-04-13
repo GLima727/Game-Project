@@ -184,7 +184,7 @@ img {
   display: none;
   grid-column: 30 / span 40;
   grid-row: 25 / 90;
-  border: 30px solid #ffffff;
+  border: 20px solid #ffffff;
   background-color: #337ed3;
   font-size: 3.7vh;
   word-wrap: break-word;
@@ -198,7 +198,7 @@ img {
 .speedOptionsButtons {
   
   padding: 0px;
-  font-size: 2.3vw;
+  font-size: 2vw;
   font-weight: bold;
   width: 26%;
   height: 40%;

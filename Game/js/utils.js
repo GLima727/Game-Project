@@ -35,9 +35,26 @@ function determineWinner({player, enemy, timerId}) {
         }
 }
 let timer = 60
+let enemyInvicibilityTimer = 0
+let playerInvicibilityTimer = 0
+
+let enemyInvicibilityTimerId 
+let playerInvicibilityTimerId 
 let timerId 
+
+function changeInvicibilityTime(fighter, time) {
+    if(fighter === "enemy"){
+        enemyInvicibilityTimer = time
+    }
+    else if(fighter === "player") {
+        playerInvicibilityTimer = time
+    }
+}
+
 function decreaseTimer(){
 
+    console.log(enemyInvicibilityTimer)
+    console.log(playerInvicibilityTimer)
     if(timer > 0) {  
 
         timerId = setTimeout(decreaseTimer, 1000);
@@ -48,4 +65,52 @@ function decreaseTimer(){
     if(timer === 0) {
         determineWinner({player, enemy, timerId});
     }
+
+    //repeated code i dont fucking know why it works like this it makes no sense
+
+    if(enemyInvicibilityTimer > 0) {  
+
+        enemyInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
+        enemyInvicibilityTimer--;
+
+    }   
+    if(enemyInvicibilityTimer === 0) {
+       clearTimeout(enemyInvicibilityTimerId);
+    }
+
+    if(playerInvicibilityTimer > 0) {  
+
+        playerInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
+        playerInvicibilityTimer--;
+
+    }   
+    if(playerInvicibilityTimer === 0) {
+       clearTimeout(playerInvicibilityTimerId);
+    }
+
+}
+function decreaseInvicibilityTimer() {
+    console.log(enemyInvicibilityTimer)
+    console.log(playerInvicibilityTimer)
+    if(enemyInvicibilityTimer > 0) {  
+
+        enemyInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
+        enemyInvicibilityTimer--;
+
+    }   
+    if(enemyInvicibilityTimer === 0) {
+       clearTimeout(enemyInvicibilityTimerId);
+    }
+
+    if(playerInvicibilityTimer > 0) {  
+
+        playerInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
+        playerInvicibilityTimer--;
+
+    }   
+    if(playerInvicibilityTimer === 0) {
+       clearTimeout(playerInvicibilityTimerId);
+    }
+
+
 }

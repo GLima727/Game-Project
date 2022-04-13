@@ -143,7 +143,6 @@ const enemy = new Fighter({
     attackDamage: 5,
     jumpHeight: 20 * gameMode
 })
-
 decreaseTimer();
 
 function animate(){
@@ -212,8 +211,11 @@ function animate(){
     //detect for colision & enemy gets hit
     if( rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&  player.isAttacking && player.framesCurrent === 4) {
         player.isAttacking = false;
-        console.log(player.attackDamage)
-        enemy.takeHit(player.attackDamage)
+        
+        if(enemyInvicibilityTimer === 0){
+            enemy.takeHit(player.attackDamage)
+            changeInvicibilityTime("enemy", 1);
+        }
 
         gsap.to('#enemyHealth', {
             width: enemy.health + '%'
@@ -228,8 +230,14 @@ function animate(){
 
     //enemy colision and player gets hit
     if( rectangularCollision({ rectangle1: enemy, rectangle2: player }) &&  enemy.isAttacking && enemy.framesCurrent === 2) {
+
         enemy.isAttacking = false;
-        player.takeHit(enemy.attackDamage)
+
+        if(playerInvicibilityTimer === 0) {
+            player.takeHit(enemy.attackDamage)
+            changeInvicibilityTime("player", 1);
+
+            }
 
         gsap.to('#playerHealth', {
             width: player.health + '%'
@@ -267,5 +275,6 @@ function changeMode(mode) {
 //controls
 keyDownEvents({player, enemy});
 keyUpEvents();
+
 
 animate();

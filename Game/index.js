@@ -86,7 +86,7 @@ const player = new Fighter({
     imageSrc: './img/samuraiMack/Idle.png',
     framesMax: 8,
     scale: 2.5,
-    attackDamage: 15 * gameMode,
+    attackDamage: 15,
     jumpHeight: 15 * gameMode
 })
 
@@ -140,7 +140,7 @@ const enemy = new Fighter({
     imageSrc: './img/kenji/Idle.png',
     framesMax: 5,
     scale: 2.5,
-    attackDamage: 5 * gameMode,
+    attackDamage: 5,
     jumpHeight: 20 * gameMode
 })
 

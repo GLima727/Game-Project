@@ -31,5 +31,13 @@ function receivePlayerName(){
         
     }
 }
-const player = new Player();
-
+function openInstructions() {
+    var container = document.getElementById('Instructions');
+    container.style.display = 'block';
+}
+document.addEventListener('mouseup', function(e) {
+    var container = document.getElementById('Instructions');
+    if (!container.contains(e.target)) {
+        container.style.display = 'none';
+    }
+});

@@ -4,13 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>DARMAN PRODUCTIONS PRESENTS: DARRRREEMANNNN</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
 
     <link rel="stylesheet" href="./MainMenu/style.css">
 
     <script src="./MainMenu/code.js"></script>     
-    <script src="./MainMenu/script.js"></script>  
     
 </head>
 
@@ -19,37 +25,32 @@
 <div class="container"> 
 
    <div class="header"> 
-      <div class="headerText"> 
          <p>FIGHTING GAME</p>
-      </div>
-
    </div>
 
-   <div class="gameBox">
-      <div class="gameText">
-         <div class="startMenu" id="startMenuBox">
-
-               <p id="startMenu" style="overflow: hidden;line-height: 1.2em;"> Choose your name to start!</p> 
-            <br/> 
-            <input type="name" name="name" id="nameInput" class="form__input" placeholder="|"/>
-            
-            <p style="line-height: 30%;"><br/></p>
-            
-            <a href="./Game/index.html"><button id ="button1" class="button1">Start</button></a>
-
-            <p style="line-height: 70%;"><br/></p>
-
-            <p class="nameInputErrorTest" style="display: none;">
-               The name must have 10 characters or less.
-             </p>
-
-            <p id="nameInputError" style="color:#ad2831;font-size: 6vh;"></p>
-         </div>
-
+      <div class="player1Box">
+         <img src="./MainMenu/frame.png">
       </div>
 
-   </div>
+      <div class="menuBox">
+         <a href="./Game/index.html"> <button  id ="button1" class="button1" >Start</button></a>
+            
+         <button  id ="settingsButton" ><i class="material-icons">settings</i></button>
+         <button  id ="button2" onclick="openInstructions()">Instructions</button>
+      </div>
 
+      <div class="player2Box">
+         <img src="./MainMenu/frame.png">
+      </div>
+
+      <div id="Instructions" class="Instructions">
+
+         <p><br></p>
+         <p>PLAYER 1 <br> W: JUMP <br> A: LEFT <br> D: RIGHT <br> SPACE: ATTACK </p>
+         <p><br></p>
+         <p>PLAYER 2 <br> ↑: JUMP <br> <-: LEFT <br> ->: RIGHT <br> ↓: ATTACK</p>
+
+     </div>
    <div class="footer"> work in progress since 10/3/22</div>
 
 </div>

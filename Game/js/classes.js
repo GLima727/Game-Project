@@ -1,5 +1,5 @@
 class Sprite {
-    constructor({ position, imageSrc, scale = 1, framesMax = 1, offset = {x:0, y:0} }) {
+    constructor({ position, imageSrc, scale = 1, framesMax = 1, offset = {x:0, y:0}, frameSpeed}) {
         this.position = position;
         this.height = 150;
         this.widght = 50;
@@ -11,9 +11,10 @@ class Sprite {
         this.framesElapsed = 0
         this.framesHold = 5
         this.offset = offset
+        this.frameSpeed = frameSpeed
     }
     animateFrames() {
-        this.framesElapsed++;
+        this.framesElapsed += this.frameSpeed;
 
         if(this.framesElapsed % this.framesHold === 0){
             if(this.framesCurrent + 1 < this.framesMax ) {
@@ -54,14 +55,18 @@ class Fighter extends Sprite{
         scale = 1,
         framesMax = 1,
         sprites,
-        attackBox = { offset: {}, widht: undefined, height: undefined }
+        attackBox = { offset: {}, widht: undefined, height: undefined },
+        attackDamage = 10,
+        jumpHeight,
+        frameSpeed,
     }) {
         super({
             position,
             imageSrc,
             scale,
             framesMax,
-            offset
+            offset,
+            frameSpeed
         })
         this.framesCurrent = 0
         this.framesElapsed = 0
@@ -73,8 +78,6 @@ class Fighter extends Sprite{
             sprites[sprite].image = new Image()
             sprites[sprite].image.src = sprites[sprite].imageSrc
         }
-
-        console.log(this.sprites)
 
         this.velocity = velocity;
         this.height = 150;
@@ -89,6 +92,8 @@ class Fighter extends Sprite{
             widht: attackBox.widht,
             height: attackBox.height,
         }
+        this.jumpHeight = jumpHeight
+        this.attackDamage = attackDamage
         this.color = color;
         this.isAttacking
         this.health = 100;
@@ -96,7 +101,7 @@ class Fighter extends Sprite{
     update() {
 
         this.draw();
-        console.log(this.dead)
+
         if(!this.dead)
             this.animateFrames()
 
@@ -106,14 +111,30 @@ class Fighter extends Sprite{
 
         //draw atackbox
         //c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.widht, this.attackBox.height)
+        //draw player Hitbox
+        //c.fillRect(this.position.x,this.position.y, this.widght, this.height)
 
         this.position.y += this.velocity.y; 
         this.position.x += this.velocity.x;
 
+        //vertical collision on the ground
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 96 ) {
             this.velocity.y = 0;
             this.position.y = 330;
         } else this.velocity.y += gravity;
+
+        let leftBorder = 10
+        //canvas width minus bordersize
+        let rightBorder = document.getElementById("canvas_container").offsetWidth - 50
+        //horizontal collision on the border
+        if (this.position.x  + this.velocity.x <= leftBorder ) {
+            this.velocity.x = 0;
+            this.position.x = leftBorder ;
+        }
+        else if(this.position.x  + this.velocity.x >= rightBorder ){
+            this.velocity.x = 0;
+            this.position.x = rightBorder ;
+        }
     }
     atack() {
         this.switchSprite("attack1")
@@ -122,9 +143,9 @@ class Fighter extends Sprite{
 
     }
 
-    takeHit() {
+    takeHit( damage) {
 
-        this.health -= 20
+        this.health -= damage
         if(this.health <= 0) {
             this.switchSprite("death")
 
@@ -142,8 +163,12 @@ class Fighter extends Sprite{
             }
             return
         }
-        if(this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax - 1) return
-        if(this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax - 1) return 
+
+        if(sprite != "death") { //only focus on atack animation if they are not dead
+            if(this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax - 1) return
+            if(this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax - 1) return 
+        }
+
         switch (sprite) {
             case "idle": 
 
@@ -193,6 +218,7 @@ class Fighter extends Sprite{
                     this.image = this.sprites.death.image
                     this.framesMax = this.sprites.death.framesMax
                     this.framesCurrent = 0;
+                    this.switchSprite("death")
                 }
                 break;  
         }

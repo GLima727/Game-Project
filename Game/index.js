@@ -1,4 +1,5 @@
 let gameMode = 1;
+localStorage.setItem("gameMode", gameMode);
 gameMode = localStorage.getItem("gameMode");
 console.log(gameMode);
 

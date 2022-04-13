@@ -29,28 +29,42 @@
    </div>
 
       <div class="player1Box">
-         <img src="./MainMenu/frame.png">
+         <img src="jimmy.png" style="position:absolute; padding: 3vw; width: 80%;height: 85%; ">
+         <img src="./MainMenu/frame.png" style="animation: fadeIn 0s linear; position:relative">
       </div>
 
       <div class="menuBox">
-         <a href="./Game/index.html"> <button  id ="button1" class="button1" >Start</button></a>
+         <a href="./Game/index.html"> <button  id ="startButton" class="startButton" >Start</button></a>
             
          <button  id ="settingsButton" ><i class="material-icons">settings</i></button>
-         <button  id ="button2" onclick="openInstructions()">Instructions</button>
+         <button  id ="insturctionsButton" onclick="openInstructions()">Instructions</button>
       </div>
 
-      <div class="player2Box">
-         <img src="./MainMenu/frame.png">
+      <div class="player2Box">    
+         <img src="shrek.png" style="position:absolute; padding: 3vw; width: 80%;height: 85%; ">
+         <img src="./MainMenu/frame.png" style="animation: fadeIn 0s linear; position:relative">
+
       </div>
 
       <div id="Instructions" class="Instructions">
 
          <p><br></p>
-         <p>PLAYER 1 <br> W: JUMP <br> A: LEFT <br> D: RIGHT <br> SPACE: ATTACK </p>
+         <p> <span style="color: #bd2c00"> PLAYER 1 </span> <br> W: JUMP <br> A: LEFT <br> D: RIGHT <br> SPACE: ATTACK </p>
          <p><br></p>
-         <p>PLAYER 2 <br> ↑: JUMP <br> <-: LEFT <br> ->: RIGHT <br> ↓: ATTACK</p>
+         <p> <span style="color: #0053a1"> PLAYER 2 </span> <br> ↑: JUMP <br> <-: LEFT <br> ->: RIGHT <br> ↓: ATTACK</p>
 
      </div>
+     <div id="leftMenuArrows" class="menuArrows">
+
+         <img src="left-arrow.png" style="width: 30%; margin-right: 2.8vw;">
+         <img src="right-arrow.png" style="width: 30%;">
+     </div>
+     <div id="rightMenuArrows" class="menuArrows">
+
+      <img src="left-arrow.png" style="width: 30%; margin-right: 2.8vw;">
+      <img src="right-arrow.png" style="width: 30%;">
+
+   </div>
    <div class="footer"> work in progress since 10/3/22</div>
 
 </div>

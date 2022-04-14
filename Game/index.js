@@ -1,10 +1,12 @@
-let gameMode = 1;
-localStorage.setItem("gameMode", gameMode);
-
 localStorage.setItem("leftScore", 0);
 localStorage.setItem("rightScore", 0);
 
-gameMode = localStorage.getItem("gameMode");
+let gameMode = localStorage.getItem("gameMode");
+
+if(gameMode === undefined) {
+    localStorage.setItem("gameMode", 1);
+}
+
 console.log(gameMode);
 
 let playerSpeed = 20 * gameMode;
@@ -272,6 +274,7 @@ function changeMode(mode) {
     console.log("Huadwhuaw")
     switch(mode){
         case 'slow':
+            console.log("slow")
             document.getElementById("slowSpeedButton").style.backgroundColor = "#cc7401"; 
             document.getElementById("normalSpeedButton").style.backgroundColor = "#d6eaec"; 
             document.getElementById("fastSpeedButton").style.backgroundColor = "#d6eaec"; 
@@ -293,7 +296,7 @@ function changeMode(mode) {
 }
 //controls
 function startGame() {
-    resetTimer(10);
+    resetTimer(50);
     decreaseTimer();
     keyDownEvents({player, enemy});
     keyUpEvents();

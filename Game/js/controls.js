@@ -100,6 +100,10 @@ function keyUpEvents() {
             case 'a': 
                 keys.a.pressed = false;
                 break;
+                
+            case " ":
+                event.preventDefault(); //prevents click of button
+                break;
         }
         //enemy keys
         switch(event.key){

@@ -23,18 +23,43 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
 
 function determineWinner({player, enemy, timerId}) {
     clearTimeout(timerId);
+
     document.querySelector("#displayText").style.display = "flex";
     if( player.health === enemy.health) {
         document.querySelector("#displayText").innerHTML = "TIE";
+
         }
     else if(player.health > enemy.health) {
         document.querySelector("#displayText").innerHTML = "PLAYER WINS";
+        
+        let playerScore = localStorage.getItem("leftScore");
+
+        playerScore++;
+        localStorage.setItem("leftScore", playerScore);
+
+        document.querySelector("#leftScore").innerHTML = playerScore;
+
+
         }
     else if(player.health < enemy.health) {
         document.querySelector("#displayText").innerHTML = "ENEMY WINS";
+
+        let enemyScore = localStorage.getItem("rightScore");
+        enemyScore++;
+        localStorage.setItem("rightScore", enemyScore);
+
+        document.querySelector("#rightScore").innerHTML = enemyScore;
+
         }
+    
 }
-let timer = 60
+let timer = 50
+function resetTimer(time) {
+    roundEnd = false
+    timer = time;
+    clearTimeout(timerId);
+}
+
 let enemyInvicibilityTimer = 0
 let playerInvicibilityTimer = 0
 
@@ -53,64 +78,53 @@ function changeInvicibilityTime(fighter, time) {
 
 function decreaseTimer(){
 
-    console.log(enemyInvicibilityTimer)
-    console.log(playerInvicibilityTimer)
+    console.log(timer)
     if(timer > 0) {  
 
         timerId = setTimeout(decreaseTimer, 1000);
+        console.log(timerId)
         timer--;
         document.querySelector('#timer').innerHTML = timer;
 
     }   
-    if(timer === 0) {
+    if(timer === 0 && !roundEnd) {
         determineWinner({player, enemy, timerId});
+        roundEnd = true
+        setTimeout(restartGame, 5000);
     }
 
     //repeated code i dont fucking know why it works like this it makes no sense
-
     if(enemyInvicibilityTimer > 0) {  
 
         enemyInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
         enemyInvicibilityTimer--;
-
     }   
     if(enemyInvicibilityTimer === 0) {
        clearTimeout(enemyInvicibilityTimerId);
     }
-
     if(playerInvicibilityTimer > 0) {  
-
         playerInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
         playerInvicibilityTimer--;
-
     }   
     if(playerInvicibilityTimer === 0) {
        clearTimeout(playerInvicibilityTimerId);
     }
-
 }
 function decreaseInvicibilityTimer() {
-    console.log(enemyInvicibilityTimer)
-    console.log(playerInvicibilityTimer)
-    if(enemyInvicibilityTimer > 0) {  
 
+    if(enemyInvicibilityTimer > 0) {  
         enemyInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
         enemyInvicibilityTimer--;
-
     }   
     if(enemyInvicibilityTimer === 0) {
        clearTimeout(enemyInvicibilityTimerId);
     }
-
     if(playerInvicibilityTimer > 0) {  
 
         playerInvicibilityTimerId  = setTimeout(decreaseInvicibilityTimer, 500);
         playerInvicibilityTimer--;
-
     }   
     if(playerInvicibilityTimer === 0) {
        clearTimeout(playerInvicibilityTimerId);
     }
-
-
 }

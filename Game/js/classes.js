@@ -158,6 +158,14 @@ class Fighter extends Sprite{
         }
     }
 
+    gainHealth(health) {
+        this.health += health;
+        
+    }
+    resetHealth() {
+        this.health = 100;
+    }
+
     switchSprite(sprite) {
         //overrides all animations
         if(this.image === this.sprites.death.image){

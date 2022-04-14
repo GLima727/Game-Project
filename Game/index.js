@@ -1,5 +1,9 @@
 let gameMode = 1;
 localStorage.setItem("gameMode", gameMode);
+
+localStorage.setItem("leftScore", 0);
+localStorage.setItem("rightScore", 0);
+
 gameMode = localStorage.getItem("gameMode");
 console.log(gameMode);
 
@@ -38,7 +42,7 @@ const shop = new Sprite({
 const player = new Fighter({
     position:
     {
-        x:0,
+        x:50,
         y:0
     },
     velocity:
@@ -93,7 +97,7 @@ const player = new Fighter({
 const enemy = new Fighter({
     position:
     {
-        x:400,
+        x:900,
         y:100
     },
     velocity:
@@ -140,13 +144,14 @@ const enemy = new Fighter({
     imageSrc: './img/kenji/Idle.png',
     framesMax: 5,
     scale: 2.5,
-    attackDamage: 5,
+    attackDamage: 8,
     jumpHeight: 20 * gameMode
 })
-decreaseTimer();
+let roundEnd = false
 
 function animate(){
     window.requestAnimationFrame(animate);
+    console.log(player.dead)
     c.fillStyle = "black";
     c.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -211,7 +216,7 @@ function animate(){
     //detect for colision & enemy gets hit
     if( rectangularCollision({ rectangle1: player, rectangle2: enemy }) &&  player.isAttacking && player.framesCurrent === 4) {
         player.isAttacking = false;
-        
+        console.log(enemyInvicibilityTimer)
         if(enemyInvicibilityTimer === 0){
             enemy.takeHit(player.attackDamage)
             changeInvicibilityTime("enemy", 1);
@@ -250,7 +255,12 @@ function animate(){
     
     //end game based on health
     if( enemy.health <= 0 || player.health <= 0) {
-        determineWinner({player, enemy, timerId});
+        if(!roundEnd){
+            determineWinner({player, enemy, timerId});
+            roundEnd = true
+            setTimeout(restartGame, 5000);
+        }
+        
     }
 
     if( playerCollision({ rectangle1: player, rectangle2: enemy }) || playerCollision({ rectangle1: enemy, rectangle2: player }) ) {
@@ -261,20 +271,82 @@ function animate(){
 function changeMode(mode) {
     console.log("Huadwhuaw")
     switch(mode){
-        case 'slow': 
+        case 'slow':
+            document.getElementById("slowSpeedButton").style.backgroundColor = "#cc7401"; 
+            document.getElementById("normalSpeedButton").style.backgroundColor = "#d6eaec"; 
+            document.getElementById("fastSpeedButton").style.backgroundColor = "#d6eaec"; 
             localStorage.setItem("gameMode", 0.6);
             break;
         case 'normal':
+            document.getElementById("slowSpeedButton").style.backgroundColor = "#d6eaec"; 
+            document.getElementById("normalSpeedButton").style.backgroundColor = "#cc7401"; 
+            document.getElementById("fastSpeedButton").style.backgroundColor = "#d6eaec"; 
             localStorage.setItem("gameMode", 1);
             break;
         case 'fast':
+            document.getElementById("slowSpeedButton").style.backgroundColor = "#d6eaec"; 
+            document.getElementById("normalSpeedButton").style.backgroundColor = "#d6eaec"; 
+            document.getElementById("fastSpeedButton").style.backgroundColor = "#cc7401"; 
             localStorage.setItem("gameMode", 2);
             break;
     }
 }
 //controls
-keyDownEvents({player, enemy});
-keyUpEvents();
+function startGame() {
+    resetTimer(10);
+    decreaseTimer();
+    keyDownEvents({player, enemy});
+    keyUpEvents();
+    animate();
+    
+}
 
+function resetHealth() {
+    player.resetHealth();
+    enemy.resetHealth();
+    gsap.to('#enemyHealth', {
+        width: enemy.health + '%'
+    })
 
-animate();
+    gsap.to('#playerHealth', {
+        width: player.health + '%'
+    })
+}
+function resetPositions() {
+    player.position.x = 50;
+    player.position.y = 0;
+    enemy.position.x = 900;
+    enemy.position.y = 100;
+
+    if(player.dead) {
+        player.dead = false;
+        player.image = player.sprites.idle.image
+        player.switchSprite("idle")
+    }
+    else if(enemy.dead) {
+        enemy.dead = false;
+        enemy.image = enemy.sprites.idle.image
+        enemy.switchSprite("idle")
+    }
+}
+function restartGame() {
+
+    resetHealth();
+    roundEnd = false
+    resetPositions();
+
+    document.querySelector("#displayText").innerHTML = "";
+    resetTimer(50);
+    decreaseTimer();
+
+}
+function restart() {
+
+    localStorage.setItem("leftScore", 0);
+    localStorage.setItem("rightScore", 0);
+    document.querySelector("#leftScore").innerHTML = 0;
+    document.querySelector("#rightScore").innerHTML = 0;
+    restartGame();
+}
+console.log("startgame")
+startGame();

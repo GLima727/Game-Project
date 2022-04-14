@@ -37,16 +37,19 @@ function keyDownEvents({player, enemy}) {
 
         switch(event.key){
             case 'd': 
+            case 'D':
                 keys.d.pressed = true;
                 player.lastKey = 'd';
                 break;
 
-            case 'a': 
+            case 'a':
+            case 'A': 
                 keys.a.pressed = true;
                 player.lastKey = 'a';
                 break;
 
             case 'w': 
+            case 'W': 
                 keys.w.pressed = true;
                 player.lastKey = 'w';
                 if(player.velocity.y === 0)
@@ -94,10 +97,12 @@ function keyUpEvents() {
     window.addEventListener("keyup", (event) =>{
         switch(event.key){
             case 'd': 
+            case 'D': 
                 keys.d.pressed = false;
                 break;
     
             case 'a': 
+            case 'A': 
                 keys.a.pressed = false;
                 break;
                 

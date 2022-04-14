@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+}
+.container {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(100, 1fr);
+    grid-template-rows: repeat(100, 1fr);
+    background-color: rgb(238, 184, 252);
+    }
+#canvas_container {
+    grid-column: 23 / 79;
+    grid-row: 20 / 80;
+    height: 576px;
+    width: 1024px;
+
+}
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: solid 5px rgb(255, 255, 255);
+    }
+
+#timer {
+    background-color: rgb(46, 46, 46);
+    height: 50px;
+    width: 100px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    border: 4px solid white;
+}
+.enemyHealth {
+    position: relative;
+    width: 100%;
+    border-top: 4px solid white;
+    border-right: 4px solid white;
+    border-bottom: 4px solid white;
+}
+
+.buttons {
+    grid-column: 20 / 82;
+    grid-row: 83 / 97;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.restartButton {
+    padding: 0px;
+    font-size: 2vw;
+    font-weight: bold;
+    width: 90%;
+    height: 90%;
+    font-family: 'Press Start 2P', cursive;
+    color: #051b27;
+    cursor: pointer;
+    text-align: center;
+    transition-duration: 0.4s;
+    
+    background-color:#d6eaec;
+    
+    border-radius: 40px;
+    border: 5px solid #ff7300; /* Green */
+    margin-top: 1vw;
+}
+.restartButton:hover {
+    cursor: pointer;
+    background-color: #e05200; 
+    font-size: 2.1vw;
+    width: 93%;
+    height: 93%;
+    border:0px;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.menuButton {
+    padding: 0px;
+    font-size: 2vw;
+    font-weight: bold;
+    width: 90%;
+    height: 90%;
+    font-family: 'Press Start 2P', cursive;
+    color: #051b27;
+    cursor: pointer;
+    text-align: center;
+    transition-duration: 0.4s;
+  
+    background-color:#d6eaec;
+    
+    border-radius: 40px;
+    border: 5px solid #0091f1; /* Green */
+    margin-top: 1vw;
+}
+.menuButton:hover {
+    cursor: pointer;
+    border:0px;
+    background-color: #0091f1; 
+    font-size: 2.1vw;
+    width: 93%;
+    height: 93%;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#leftScore {
+    grid-column: 5 / span 13;
+    grid-row: 2 / span 26;
+    background-color: #7441ff;
+    border: 0.7vw solid #003049;
+    border-radius: 50% 50% 50% 50% / 10% 10% 40% 40%;
+    font-size: 5vw;
+    
+    text-align:center;
+    margin-left: 0.3vw;
+    line-height: 12vw;
+}
+
+#rightScore {
+    grid-column: 82 / span 13;
+    grid-row: 2 / span 26;
+    background-color: #7441ff;
+    border: 0.7vw solid #003049;
+    border-radius: 50% 50% 50% 50% / 10% 10% 40% 40%;
+    font-size: 5vw;
+    text-align:center;
+    margin-left: 0.3vw;
+    line-height: 12vw;
+}
+
+p {
+    margin :0;
+}

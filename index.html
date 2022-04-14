@@ -52,20 +52,24 @@
       <div id="Instructions" class="Instructions">
 
          <p><br></p>
-         <p> <span style="color: #bd2c00"> PLAYER 1 </span> <br> W: JUMP <br> A: LEFT <br> D: RIGHT <br> SPACE: ATTACK </p>
+         <p> <span style="color: #bd2c00"> PLAYER 1 </span> <br> W: Jump <br> A: Left <br> D: Right <br> SPACE: Attack </p>
          <p><br></p>
-         <p> <span style="color: #0053a1"> PLAYER 2 </span> <br> ↑: JUMP <br> <-: LEFT <br> ->: RIGHT <br> ↓: ATTACK</p>
+         <p> <span style="color: #0053a1"> PLAYER 2 </span> <br> ↑: Jump <br> <-: Left <br> ->: Right <br> ↓: Attack</p>
 
      </div>
      
      <div id="Settings" class="Settings"> 
-      <p style="text-align: center; font-size: 3vw; color: rgb(250, 243, 232); margin-left: 5.2vw; line-height: 6vw;">SETTINGS</p>
-      <div class="speedOptions">
-         <button class="speedOptionsButtons" style=" margin-left: 1vw;" onclick="changeMode('slow')" >Slow</button> 
-         <button class="speedOptionsButtons" style="width: 40%; margin-left: -1.5vw;" onclick="changeMode('normal')" >Normal</button> 
-         <button class="speedOptionsButtons" style=" margin-left: -1.5vw;" onclick="changeMode('fast')" >Fast</button>
-      </div>
 
+         <p id="settingsHeader">Settings</p>
+            <div class="speedOptions">
+               <button class="speedOptionsButtons" id="slowSpeedButton" style=" margin-left: 1vw;" onclick="changeMode('slow')" >Slow</button> 
+               <button class="speedOptionsButtons" id="normalSpeedButton" style="width: 40%; margin-left: -1.5vw;" onclick="changeMode('normal')" >Normal</button> 
+               <button class="speedOptionsButtons" id="fastSpeedButton" style=" margin-left: -1.5vw;" onclick="changeMode('fast')" >Fast</button>
+            </div>
+
+         <div class="closeSettings">
+            <button class="closeSettingsButton" style=" margin-left: -1.5vw;" onclick="closeSettings()" >Ready!</button>
+         </div>
    </div>
 
      <div id="leftMenuArrows" class="menuArrows">

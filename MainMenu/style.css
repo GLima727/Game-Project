@@ -176,6 +176,15 @@ img {
   word-wrap: break-word;
   overflow: auto;
 }
+#settingsHeader {
+  text-align: center;
+   font-size: 3vw; 
+   color: rgb(250, 243, 232); 
+   margin-left: 5.2vw; 
+   line-height: 6vw;
+   grid-column: 1 / span 100; 
+   grid-row: 1 / span 30;
+}
 .Settings {
   grid-template-columns: repeat(100, 1fr) ;
   grid-template-rows: repeat(100, 1fr);
@@ -192,7 +201,7 @@ img {
 }
 .speedOptions {
   grid-column: 1 / span 100;
-  grid-row: 5 / span 30;
+  grid-row: 20/ span 30;
 
 }
 .speedOptionsButtons {
@@ -208,6 +217,8 @@ img {
   text-align: center;
   transition-duration: 0.4s;
 
+  background-color:#d6eaec;
+
   border-radius: 40px;
   border: 5px solid #ff7300; /* Green */
   margin-top: 1vw;
@@ -216,11 +227,36 @@ img {
   cursor: pointer;
   background-color: #cc7401; 
 }
+ 
+.closeSettings {
+  grid-column: 15 / 95;
+  grid-row: 75 / span 20;
+}
+.closeSettingsButton {
 
-.speedOptionsButtons:active {
+  padding: 0px;
+  font-size: 2vw;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  font-family: 'Press Start 2P', cursive;
+  color: #051b27;
+  cursor: pointer;
+  text-align: center;
+  transition-duration: 0.4s;
+
+  background-color:#d6eaec;
+  
+  border-radius: 40px;
+  border: 5px solid #ff7300; /* Green */
+  margin-top: 1vw;
+}
+.closeSettingsButton:hover {
   cursor: pointer;
   background-color: #cc7401; 
 }
+
+
 
 #leftMenuArrows {
   grid-column: 19 / span 20;
@@ -239,6 +275,10 @@ img {
 @keyframes fadeIn {
   0% {opacity:0;}
   100% {opacity:1;}
+}
+@keyframes fadeOut {
+  0% {opacity:1;}
+  100% {opacity:0;}
 }
 
 @keyframes float {

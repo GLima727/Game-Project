@@ -9,21 +9,16 @@ body{
   overflow:auto;
   font-family: 'Press Start 2P', cursive;
   font-weight: bold;
-  font-size: 10px;
 
   display: grid;
 
   grid-template-columns: repeat(100, 1fr) ;
   grid-template-rows: repeat(100, 1fr); /* grid-template: 50px 1fr 1fr 100px / repeat(3, 1fr) */
-  gap: 0px;
 
-  padding: 0px;
   box-sizing: border-box;
 }
 .header{
-  /*font-family: 'Quicksand', sans-serif;*/ /*overflow:auto;*/
-  padding: 0px;
-  box-sizing: border-box;
+  
 
   grid-row: 1 / 20;
   grid-column: 1 / span 100;
@@ -32,13 +27,15 @@ body{
   font-family: 'Press Start 2P', cursive;
   font-weight: bold;
   font-size: 7.2vw;
-  -webkit-text-stroke: 1px rgb(107, 74, 60); /*border font*/
+  -webkit-text-stroke: 0.004em rgb(107, 74, 60); /*border font*/
+
   text-align: justify;
   text-decoration:solid;
   text-decoration: underline;
 
   text-align: center;
   word-wrap: break-word;
+
   line-height: 1.35em;
 
   /*animation: slidein 0.5s linear;*/
@@ -77,8 +74,8 @@ body{
   grid-row: 105;
 
   border: 0px solid #003049;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-top-right-radius: 5vw;
+  border-top-left-radius: 5vw;
 }
 
 .startButton {
@@ -86,7 +83,7 @@ body{
   border: 0px;
   background: none;
   
-  font-size: 3.5vw;
+  font-size: 3.3vw;
   font-weight: bold;
 
   font-family: 'Press Start 2P', cursive;
@@ -95,9 +92,12 @@ body{
   text-align: center;
   transition-duration: 0.4s;
 
-  border-radius: 20px;
-  border: 5px solid #80ffc0; /* Green */
+  border-radius: 5vw;
+  border: 0.6vh solid #80ffc0; /* Green */
   margin-bottom: 4vw;
+
+  height:20%;
+  width: 100%;
   
 }
 
@@ -120,6 +120,8 @@ body{
 
   border: 0px;
   background: none;
+
+  height: 10%;
   
   font-size: 1.5vw;
   font-weight: bold;
@@ -130,8 +132,8 @@ body{
   text-align: center;
   transition-duration: 0.4s;
 
-  border-radius: 40px;
-  border: 5px solid #ff7300; /* Green */
+  border-radius: 4vw;
+  border: 0.6vh solid #ff7300; /* Green */
   margin-top: 4vw;
   
 }
@@ -152,7 +154,7 @@ img {
 .material-icons { 
   font-size: 13vw;
   color: #aac9dd; 
-  -webkit-text-stroke: 3px rgb(255, 255, 255);
+  -webkit-text-stroke: 0.5vh rgb(255, 255, 255);
   transition-duration: 0.4s;
 }
 
@@ -160,7 +162,7 @@ img {
   font-size: 14vw;
 
   color: #0f90e6; 
-  -webkit-text-stroke: 2px rgb(255, 255, 255);
+  -webkit-text-stroke: 0.1vh rgb(255, 255, 255);
   cursor: pointer;
 
 }
@@ -170,7 +172,7 @@ img {
     display: none;
   grid-column: 40 / span 21;
   grid-row: 30 / 85;
-  border: 10px solid #ffffff;
+  border: 0.7vh solid #ffffff;
   background-color: #ff7300;
   font-size: 3.7vh;
   word-wrap: break-word;
@@ -193,11 +195,11 @@ img {
   display: none;
   grid-column: 30 / span 40;
   grid-row: 25 / 90;
-  border: 20px solid #ffffff;
   background-color: #337ed3;
   font-size: 3.7vh;
   word-wrap: break-word;
   overflow: auto;
+  border: 0.7vh solid #ffffff;
 }
 .speedOptions {
   grid-column: 1 / span 100;
@@ -219,8 +221,8 @@ img {
 
   background-color:#d6eaec;
 
-  border-radius: 40px;
-  border: 5px solid #ff7300; /* Green */
+  border-radius: 4vw;
+  border: 0.7vh solid #ff7300; /* Green */
   margin-top: 1vw;
 }
 .speedOptionsButtons:hover {
@@ -247,16 +249,14 @@ img {
 
   background-color:#d6eaec;
   
-  border-radius: 40px;
-  border: 5px solid #ff7300; /* Green */
+  border-radius: 40vh;
+  border: 0.9vh solid #ff7300; /* Green */
   margin-top: 1vw;
 }
 .closeSettingsButton:hover {
   cursor: pointer;
   background-color: #cc7401; 
 }
-
-
 
 #leftMenuArrows {
   grid-column: 19 / span 20;
@@ -271,6 +271,125 @@ img {
   margin-left: 1.4vw;
 }
 
+.infoBox {
+
+  background-color: #337ed3;
+  border: 0.7vw solid rgb(255, 255, 255);
+  word-wrap: break-word;
+  text-align: center;
+}
+/* INFO BOX FOR PLAYER 1 */
+#infoBoxLeft {
+  grid-column: 3 / span 11;
+  grid-row: 25 / span 62;
+
+}
+.infoValues {
+  font-size: 2.5vw;
+  line-height: 10vh;
+  color: #051b27;
+  text-align: center;
+}
+#infoHealthLeft {
+  width: 100%;
+  height: 22%;
+  font-size: 1.2vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+  border-bottom: 0.3vw solid #ffffff;
+}
+
+#leftHealthValue {
+
+}
+
+#infoSpeedLeft {
+  width: 100%;
+  height: 22%;
+  font-size: 1.4vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+  border-bottom: 0.3vw solid #ffffff;
+}
+#leftSpeedValue {
+
+}
+#infoAttackLeft {
+  width: 100%;
+  height: 22%;
+  font-size: 1.3vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+  border-bottom: 0.3vw solid #ffffff;
+}
+#leftAttackValue {
+
+}
+#infoStyleLeft {
+  width: 100%;
+  height: 20%;
+  font-size: 1.3vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+}
+#leftStyleValue {
+  font-size: 0.9vw;
+  -webkit-transform: scaleY(2);
+  line-height: 3.4vw;
+}
+
+/* INFO BOX FOR PLAYER 2 */
+#infoBoxRight {
+  grid-row: 25 / span 62;
+  grid-column: 87 / span 11;
+}
+
+#infoHealthRight {
+  width: 100%;
+  height: 22%;
+  font-size: 1.2vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+  border-bottom: 0.3vw solid #ffffff;
+}
+
+#rightHealthValue {
+
+}
+
+#infoSpeedRight {
+  width: 100%;
+  height: 22%;
+  font-size: 1.4vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+  border-bottom: 0.3vw solid #ffffff;
+}
+#rightSpeedValue {
+
+}
+#infoAttackRight {
+  width: 100%;
+  height: 22%;
+  font-size: 1.3vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+  border-bottom: 0.3vw solid #ffffff;
+}
+#rightAttackValue {
+
+}
+#infoStyleRight {
+  width: 100%;
+  height: 20%;
+  font-size: 1.3vw;
+  margin-top: 1vw;
+  color:rgb(0, 255, 221);
+}
+#rightStyleValue {
+  font-size: 2vw;
+  line-height: 3.4vw;
+}
 
 @keyframes fadeIn {
   0% {opacity:0;}

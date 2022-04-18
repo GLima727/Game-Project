@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <style>
+        body{
+            margin: 0;
+            background-color:#d6eaec;
+            }
+
+        .container {
+            display: grid; /* or inline-flex */
+            grid-template-columns: repeat(100, 1fr);
+            grid-template-rows: repeat(100, 1fr);
+            background-color: rgb(252, 178, 94);
+            width: 100vw;
+            height: 100vh;
+
+        }
+        .smallcontainer {
+            display: flex;
+            grid-row: 20/span 50;
+            grid-column: 20/ span 50;
+        }
+        .item {
+
+            background-color: rgb(219, 255, 162);
+
+            border: 12px solid rgb(206, 175, 175);
+            box-sizing: border-box;
+            background-image:
+                linear-gradient(to bottom, rgba(255,255,0,0.5), rgba(0,0,255,0.5)),
+                url("../shrek.png");
+            background-size: 100% 100%;
+            flex: 2.5;
+            /*flex: 3 1 auto;  grow, shrink and basis */
+            }
+
+            .item2 {
+
+            background-color: rgb(252, 219, 255);
+  
+            box-sizing: border-box;
+            border: 12px solid rgb(255, 104, 104);
+            flex: 5;
+        }
+    </style>
+</head>
+
+<body >
+
+    <div class="container"> 
+        <div class="smallcontainer">
+            <div class="item">
+            </div>
+            <div class="item2">
+
+            </div> 
+            <div class="item">
+
+            </div>
+        </div>
+    </div>
+    <button id="search">Search</button>
+        <script>
+        var q = "Testing google search";
+        document.getElementById('search').onclick = function() {
+            window.open('http://google.com/search?q='+q);
+        };
+        </script>
+
+	</body>
+</html>
